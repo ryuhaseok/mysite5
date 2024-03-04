@@ -3,6 +3,72 @@
 
 <mapper namespace="user">
 
-   <!-- 쿼리문 작성 -->
+	<!-- 방명록 삭제 -->
+	<delete id="deleteGuestbook" parameterType="com.javaex.vo.GuestVo">
+	<![CDATA[
+		delete from guestbook
+		where no = #{no}
+		and password = #{pw};
+	]]>
+	</delete>
+
+   <!-- 방명록 등록 -->
+   <insert id="insertGuestbook" parameterType="com.javaex.vo.GuestVo">
+   <![CDATA[
+   		insert into guestbook
+		values(null, #{name}, #{pw}, #{content}, now())
+   ]]>
+   </insert>
+
+   <!-- 리스트 가져오기-->
+   <select id="selectGuestList" resultType="com.javaex.vo.GuestVo">
+   <![CDATA[
+	   	select  no,
+				name,
+	        	reg_date regDate,
+	        	content
+		from guestbook
+   ]]>
+   </select>
+
+	<!-- 회원정보수정 -->
+	<update id="updateUser" parameterType="com.javaex.vo.UserVo">
+	<![CDATA[
+		update users
+		set password = #{password},
+		name = #{name},
+		gender = #{gender}
+		where no = #{no};
+	]]>
+	</update>
+
+   <!-- 번호로 아이디 가져오기-->
+   <select id="selectIdByNo" parameterType="int" resultType="map">
+   <![CDATA[
+   		select  id,
+   				no
+   		from users
+   		where no = #{no}
+   ]]>
+   </select>
+
+   <!-- 아이디 패스워드로 번호 이름 가져오기-->
+   <select id="selectByIdPw" parameterType="com.javaex.vo.UserVo" resultType="com.javaex.vo.UserVo">
+   <![CDATA[
+   		select  no,
+   				name
+   		from users
+   		where id = #{id}
+   		and password = #{password}
+   ]]>
+   </select>
+   
+   <!-- 회원가입 -->
+   <insert id="insertUser" parameterType="com.javaex.vo.UserVo">
+   <![CDATA[
+   		insert into users
+		values(null, #{id}, #{password}, #{name}, #{gender});
+   ]]>
+   </insert>
 
 </mapper>
