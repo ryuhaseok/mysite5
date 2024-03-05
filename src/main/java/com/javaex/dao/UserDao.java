@@ -45,6 +45,7 @@ public class UserDao {
 		return uMap;
 	}//
 	
+	//수정
 	public int updateUser(UserVo userVo) {
 		System.out.println("UserDao.updateUser");
 		

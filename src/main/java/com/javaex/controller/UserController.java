@@ -75,10 +75,14 @@ public class UserController {
 	
 	//회원정보수정폼
 	@RequestMapping(value="/user/modifyform", method= {RequestMethod.GET, RequestMethod.POST})
-	public String modifyForm(@RequestParam(value="no") int no, Model model) {
+	public String modifyForm(HttpSession session, Model model) {
 		System.out.println("UserController.modifyForm()");
 		
-		Map<String, Object> uMap = userService.exeSelectIdByNo(no);
+		//세션에 넣어놓은 키값(큰따옴표랑 같이)으로 가져와야함(변수명 X)
+		UserVo authVo = (UserVo)session.getAttribute("authUser");
+		System.out.println(authVo);
+		
+		Map<String, Object> uMap = userService.exeSelectIdByNo(authVo.getNo());
 		
 		model.addAttribute("uMap", uMap);
 		System.out.println(uMap);
