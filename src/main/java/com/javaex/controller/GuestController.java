@@ -43,12 +43,10 @@ public class GuestController {
 	}
 	
 	//삭제폼
+	//addList에서 no가 넘어오도록 만들었기때문에 삭제폼jsp에서 ${param.no}를 숨겨서 또 넘어가게 하면 됨
 	@RequestMapping(value="/guest/deleteform", method= {RequestMethod.GET, RequestMethod.POST})
-	public String deleteForm(@RequestParam(value="no") int no, Model model) {
+	public String deleteForm() {
 		System.out.println("GuestController.deleteForm()");
-		
-		model.addAttribute("no", no);
-		System.out.println(no);
 		
 		return "guestbook/deleteForm";
 	}
