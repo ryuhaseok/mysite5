@@ -87,7 +87,7 @@
 	
 							</div>
 							
-							<input type="hidden" name="no" value="${requestScope.uMap.no}">
+							<input type="hidden" name="no" value="${sessionScope.no}">
 	
 							<!-- 버튼영역 -->
 							<div class="button-area">
